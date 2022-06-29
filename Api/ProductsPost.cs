@@ -30,16 +30,4 @@ public class ProductsPost
         var newProduct = await productData.AddProduct(product);
         return new OkObjectResult(newProduct);
     }
-    
-    [FunctionName("ProductsPost1")]
-    public async Task<IActionResult> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "products/ruchira")] HttpRequest req,
-        ILogger log)
-    {
-        var body = await new StreamReader(req.Body).ReadToEndAsync();
-        var product = JsonSerializer.Deserialize<Product>(body, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-
-        var newProduct = await productData.AddProduct(product);
-        return new OkObjectResult(newProduct);
-    }
 }
